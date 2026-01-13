@@ -48,7 +48,7 @@ let packageJson: Record<string, unknown> | null | undefined;
 export function getPackageJson(): Record<string, unknown> | null {
   try {
     return JSON.parse(
-      readFileSync(join(process.cwd(), "package.json"), "utf-8")
+      readFileSync(join(process.cwd(), "package.json"), "utf-8"),
     );
   } catch {
     return null;
@@ -83,7 +83,7 @@ export function getProjectFormat(): "cjs" | "esm" {
  */
 export function getStructure(
   options: Required<RouterOptions>,
-  path: string
+  path: string,
 ): RouteStructure {
   path = path.replace(/\\/g, "/");
 
@@ -134,13 +134,16 @@ export async function buildRouter(options: Required<RouterOptions>) {
   const isEsm = format === "esm";
   const esmPrefix = isEsm ? "m" : "";
 
-  const entryDir = join(process.cwd(), options.directory).replace(/\\/g, "/");
+  const entryDir = join(process.cwd(), options.directory).replace(
+    /\\/g,
+    "/",
+  );
 
   await build({
     entry: [entryDir],
     outDir: join(BUILD_DIR, options.directory),
     splitting: true,
-    esbuildOptions: (esOptions) => {
+    esbuildOptions: esOptions => {
       esOptions.outbase = entryDir;
     },
     format,
@@ -162,9 +165,13 @@ export const undefinedAdapter = createAdapter((i, _o) => ({
   },
 }));
 
-export function defineOptions(router?: RouterOptions | string): RouterOptions {
+export function defineOptions(
+  router?: RouterOptions | string,
+): RouterOptions {
   const options =
-    typeof router === "string" ? { directory: router } : (router ?? {});
+    typeof router === "string"
+      ? { directory: router }
+      : (router ?? {});
 
   if (options.directory)
     options.directory = isAbsolute(options.directory)
@@ -175,7 +182,7 @@ export function defineOptions(router?: RouterOptions | string): RouterOptions {
 }
 
 export function fallbackOptions(
-  options: RouterOptions
+  options: RouterOptions,
 ): Required<RouterOptions> {
   return {
     directory: "routes",

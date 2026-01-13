@@ -36,14 +36,20 @@ export const EVENTS: Events[] = [
 // Allowed methods for Telegram bot updates
 export const METHODS: M[] = [...CALLBACKS, ...EVENTS];
 
-export function assertCommandScope(importData: ParsedImport<H, M, R>) {
-  if (importData.method !== "command" || !("scope" in importData.data)) return;
+export function assertCommandScope(
+  importData: ParsedImport<H, M, R>,
+) {
+  if (
+    importData.method !== "command" ||
+    !("scope" in importData.data)
+  )
+    return;
 
   const { scope } = importData.data;
 
   if (typeof scope !== "string") {
     throw new Error(
-      "Command scope must be a string, check following link to see the scope template: https://storona.domin.lol/adapters/grammy#scope-values"
+      "Command scope must be a string, check following link to see the scope template: https://storona.domin.zip/adapters/grammy#scope-values",
     );
   }
 
@@ -63,18 +69,23 @@ export function assertCommandScope(importData: ParsedImport<H, M, R>) {
       CHAT_SCOPE_REGEX,
       CHAT_ADMINISTRATORS_SCOPE_REGEX,
       CHAT_MEMBER_SCOPE_REGEX,
-    ].some((regex) => regex.test(scope))
+    ].some(regex => regex.test(scope))
   ) {
     return;
   }
 
   throw new Error(
-    "Invalid command scope, check following link to see the scope template: https://storona.domin.lol/adapters/grammy#scope-values"
+    "Invalid command scope, check following link to see the scope template: https://storona.domin.zip/adapters/grammy#scope-values",
   );
 }
 
-export function assertCommandDescription(importData: ParsedImport<H, M, R>) {
-  if (importData.method === "command" && !("description" in importData.data)) {
+export function assertCommandDescription(
+  importData: ParsedImport<H, M, R>,
+) {
+  if (
+    importData.method === "command" &&
+    !("description" in importData.data)
+  ) {
     throw new Error("Command description is required");
   }
 }
@@ -82,13 +93,13 @@ export function assertCommandDescription(importData: ParsedImport<H, M, R>) {
 export function assertMethod(method: unknown): asserts method is M {
   if (typeof method !== "string" || !METHODS.includes(method as M)) {
     throw new Error(
-      `Event must be one of:\n${METHODS.join(", ")}\nReceived: ${method}`
+      `Event must be one of:\n${METHODS.join(", ")}\nReceived: ${method}`,
     );
   }
 }
 
 export function assertExportedVariables(
-  route: unknown
+  route: unknown,
 ): asserts route is ParsedImport<H, M, R> {
   if (typeof route !== "object" || route === null) {
     throw new Error("No exports found");
@@ -100,14 +111,21 @@ export function assertExportedVariables(
     !Array.isArray(route.method)
   ) {
     // Ignore METHODS check because of L2, L3 levels
-    throw new Error(`Event must of type string\nReceived: ${route.method}`);
+    throw new Error(
+      `Event must of type string\nReceived: ${route.method}`,
+    );
   }
 
   if ("route" in route) {
     const typeOfRoute = typeof route.route;
 
-    if (typeOfRoute !== "string" && !(route.route instanceof RegExp)) {
-      throw new Error("Exported route must be either string or regex");
+    if (
+      typeOfRoute !== "string" &&
+      !(route.route instanceof RegExp)
+    ) {
+      throw new Error(
+        "Exported route must be either string or regex",
+      );
     }
   }
 }

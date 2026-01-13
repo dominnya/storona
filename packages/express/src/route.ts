@@ -11,7 +11,7 @@ let packageJson: Record<string, unknown> | null | undefined;
 export function getPackageJson(): Record<string, unknown> | null {
   try {
     return JSON.parse(
-      readFileSync(join(process.cwd(), "package.json"), "utf-8")
+      readFileSync(join(process.cwd(), "package.json"), "utf-8"),
     );
   } catch {
     return null;
@@ -34,7 +34,8 @@ export function getPackageVersion(): string {
 
   if (!packageJson) return "1.0.0";
 
-  return "version" in packageJson && typeof packageJson.version === "string"
+  return "version" in packageJson &&
+    typeof packageJson.version === "string"
     ? packageJson.version
     : "1.0.0";
 }
@@ -52,7 +53,7 @@ export function getPrefix(prefix: `/${string}` | true): string {
  */
 export function prependPrefix(
   structure: RouteStructure,
-  prefix: string
+  prefix: string,
 ): RouteStructure {
   structure.endpoint = `${prefix}${structure.endpoint}`;
   structure.endpoint = structure.endpoint.replace(/\/$/g, "");

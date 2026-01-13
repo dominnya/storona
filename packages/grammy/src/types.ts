@@ -16,11 +16,12 @@ type CallbacksContext<T extends Callbacks> = T extends "command"
   ? CommandContext<Context>
   : HearsContext<Context>;
 
-type EventsContext<T extends FilterQuery | void> = T extends FilterQuery
-  ? Filter<Context, T>
-  : Context;
+type EventsContext<T extends FilterQuery | void> =
+  T extends FilterQuery ? Filter<Context, T> : Context;
 
-type Middleware<T extends MethodType, U, V> = T extends Callbacks ? U : V;
+type Middleware<T extends MethodType, U, V> = T extends Callbacks
+  ? U
+  : V;
 
 type Ctx<T extends MethodType> = Middleware<
   T,

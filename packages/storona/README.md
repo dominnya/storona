@@ -4,7 +4,7 @@
   Overview
   <sup>
     <strong>
-      <code>&nbsp;<a href="https://storona.domin.lol/">Documentation</a>&nbsp;</code>
+      <code>&nbsp;<a href="https://storona.domin.zip/">Documentation</a>&nbsp;</code>
     </strong>
   </sup>
 </h1>
@@ -52,8 +52,8 @@ Storona is designed to be simple and easy to use. It is neither a complete frame
 
 The idea of route design was highly inspired by the [Nitro](https://nitro.unjs.io/guide/routing#filesystem-routing) framework that uses h3 under the hood. Storona on the other hand is compatible with different kind of frameworks like [Express](https://expressjs.com/), [Fastify](https://fastify.dev/) and [grammY](https://grammy.dev/).
 
-For the simplicity reason Storona supports TypeScript and JSX out-of-the-box. The transpilation of routes is handled by [tsup](https://tsup.egoist.dev/). For more information regarding the configuration, see the [Transpilation of TypeScript](https://storona.domin.lol/learning/transpilation-of-typescript) guide.
+For the simplicity reason Storona supports TypeScript and JSX out-of-the-box. The transpilation of routes is handled by [tsup](https://tsup.egoist.dev/). For more information regarding the configuration, see the [Transpilation of TypeScript](https://storona.domin.zip/learning/transpilation-of-typescript) guide.
 
 ## Documentation
 
-For more information regarding Storona, please refer to the [official documentation](https://storona.domin.lol).
+For more information regarding Storona, please refer to the [official documentation](https://storona.domin.zip).

@@ -4,12 +4,12 @@
   Overview
   <sup>
     <strong>
-      <code>&nbsp;<a href="https://storona.domin.lol/adapters/fastify/">Documentation</a>&nbsp;</code>
+      <code>&nbsp;<a href="https://storona.domin.zip/adapters/fastify/">Documentation</a>&nbsp;</code>
     </strong>
   </sup>
 </h1>
 
-This package is an adapter for [storona](https://storona.domin.lol/) file-based router. It allows to use [Fastify](https://fastify.dev/) web framework with storona.
+This package is an adapter for [storona](https://storona.domin.zip/) file-based router. It allows to use [Fastify](https://fastify.dev/) web framework with storona.
 
 > Regarding all features and caveats, please refer to the documentation.
 

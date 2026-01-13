@@ -17,7 +17,10 @@ import {
   undefinedAdapter,
 } from "@/utils";
 import type { Adapter, RouteStructure } from "@/adapter";
-import { assertHandler, assertOverrideArchitecturePath } from "@/validate";
+import {
+  assertHandler,
+  assertOverrideArchitecturePath,
+} from "@/validate";
 
 // Functions aren't pure to avoid repetitive code
 export let logger: Logger;
@@ -26,7 +29,7 @@ export let logger: Logger;
  * Register endpoints relative to file system.
  * Automatically transpiles esm, jsx & ts to cjs.
  *
- * @see {@link https://storona.domin.lol}
+ * @see {@link https://storona.domin.zip}
  * @param app - Your framework instance. Supported frameworks: Express, Fastify.
  * @returns Status of each found endpoint.
  * @example
@@ -86,15 +89,15 @@ export let logger: Logger;
  */
 export async function createRouter<T>(
   app: T,
-  options?: RouterOptions
+  options?: RouterOptions,
 ): Promise<EndpointInfo[]>;
 export async function createRouter<T>(
   app: T,
-  directory?: string
+  directory?: string,
 ): Promise<EndpointInfo[]>;
 export async function createRouter<T>(
   app: T,
-  router?: RouterOptions | string
+  router?: RouterOptions | string,
 ): Promise<EndpointInfo[]> {
   const endpointStatus: EndpointInfo[] = [];
 
@@ -106,7 +109,7 @@ export async function createRouter<T>(
 
   if (options.directory.endsWith("/")) {
     logger.error(
-      "Routes directory should not end with a slash, skipping router registration"
+      "Routes directory should not end with a slash, skipping router registration",
     );
     return endpointStatus;
   }
@@ -118,10 +121,12 @@ export async function createRouter<T>(
   } catch (error) {
     if (error instanceof Error) {
       logger.error(
-        `Failed to instantiate adapter: ${(error as Error).message}`
+        `Failed to instantiate adapter: ${(error as Error).message}`,
       );
     } else {
-      logger.error(`Unknown error while instantiating adapter: ${error}`);
+      logger.error(
+        `Unknown error while instantiating adapter: ${error}`,
+      );
     }
     return endpointStatus;
   }
@@ -139,7 +144,7 @@ export async function createRouter<T>(
       assertOverrideArchitecturePath(
         options,
         file,
-        importData as Record<string, unknown>
+        importData as Record<string, unknown>,
       );
 
       structure = getStructure(options, file);
@@ -151,9 +156,13 @@ export async function createRouter<T>(
         error: error as Error,
       });
       if (error instanceof Error) {
-        logger.error(`Failed to register ${file}: ${(error as Error).message}`);
+        logger.error(
+          `Failed to register ${file}: ${(error as Error).message}`,
+        );
       } else {
-        logger.error(`Unknown error while registering ${file}: ${error}`);
+        logger.error(
+          `Unknown error while registering ${file}: ${error}`,
+        );
       }
       continue;
     }
@@ -175,23 +184,24 @@ export async function createRouter<T>(
     } catch (error) {
       if (error instanceof Error) {
         logger.error(
-          `Failed to register ${setEndpoint}: ${(error as Error).message}`
+          `Failed to register ${setEndpoint}: ${(error as Error).message}`,
         );
       } else {
         logger.error(
-          `Unknown error while registering ${setEndpoint}: ${error}`
+          `Unknown error while registering ${setEndpoint}: ${error}`,
         );
       }
       endpointStatus.push({
         path: file,
         registered: false,
-        error: error instanceof Error ? error : new Error("Unknown error"),
+        error:
+          error instanceof Error ? error : new Error("Unknown error"),
       });
       continue;
     }
 
     logger.info(
-      `Registered ${setMethod.toString().toUpperCase()} ${setEndpoint}`
+      `Registered ${setMethod.toString().toUpperCase()} ${setEndpoint}`,
     );
     endpointStatus.push({
       path: file,
@@ -206,9 +216,13 @@ export async function createRouter<T>(
     await adapter.on.ready?.(endpointStatus);
   } catch (error) {
     if (error instanceof Error) {
-      logger.error(`Failed to run ready hook: ${(error as Error).message}`);
+      logger.error(
+        `Failed to run ready hook: ${(error as Error).message}`,
+      );
     } else {
-      logger.error(`Unknown error while running ready hook: ${error}`);
+      logger.error(
+        `Unknown error while running ready hook: ${error}`,
+      );
     }
   }
   return endpointStatus;

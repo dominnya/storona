@@ -51,7 +51,9 @@ test("getStructure() correctly returns index", () => {
     directory: "skiprouterreplace",
   });
 
-  expect(getStructure(options, "nested/route/index.put.ts")).toStrictEqual({
+  expect(
+    getStructure(options, "nested/route/index.put.ts"),
+  ).toStrictEqual({
     endpoint: "/nested/route",
     method: "put",
   });
@@ -80,14 +82,16 @@ test("getStructure() correctly replaces prefix directory", () => {
     directory: "src/route",
   });
 
-  expect(getStructure(options, "src/routes/nested/route.get.ts")).toStrictEqual(
-    {
-      endpoint: "/src/routes/nested/route",
-      method: "get",
-    },
-  );
+  expect(
+    getStructure(options, "src/routes/nested/route.get.ts"),
+  ).toStrictEqual({
+    endpoint: "/src/routes/nested/route",
+    method: "get",
+  });
 
-  expect(getStructure(options, "src/route/nested/route.get.ts")).toStrictEqual({
+  expect(
+    getStructure(options, "src/route/nested/route.get.ts"),
+  ).toStrictEqual({
     endpoint: "/nested/route",
     method: "get",
   });

@@ -76,13 +76,13 @@ export default defineConfig({
     socialLinks: [
       {
         icon: "github",
-        link: "https://github.com/domin-mnd/storona",
+        link: "https://github.com/dominnya/storona",
       },
     ],
 
     footer: {
       message: "Released under the MIT License.",
-      copyright: "Copyright © 2024-present domin-mnd",
+      copyright: "Copyright © 2024-present dominnya",
     },
 
     search: {
@@ -93,13 +93,17 @@ export default defineConfig({
     },
 
     editLink: {
-      pattern: "https://github.com/domin-mnd/storona/edit/master/docs/:path",
+      pattern:
+        "https://github.com/dominnya/storona/edit/master/docs/:path",
     },
   },
 
   head: [
     ["link", { rel: "icon", href: "/favicon.ico" }],
-    ["meta", { property: "og:image", content: "/preview-banner.png" }],
+    [
+      "meta",
+      { property: "og:image", content: "/preview-banner.png" },
+    ],
     [
       "meta",
       {

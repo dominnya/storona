@@ -60,7 +60,9 @@ export function createAdapter<H, M, R, I, O>(
   return (options?: O) => (instance: I) => adapter(instance, options);
 }
 
-export type AdapterCallback<H, M, R, I> = (instance: I) => Adapter<H, M, R>;
+export type AdapterCallback<H, M, R, I> = (
+  instance: I,
+) => Adapter<H, M, R>;
 export type Adapter<H, M, R> = AdapterV1<H, M, R>;
 
 export interface AdapterV1<H, M, R> {
@@ -75,7 +77,9 @@ export interface AdapterV1<H, M, R> {
       structure: RouteStructure,
     ) => Promise<RouteStructure> | RouteStructure;
     /** Registering a route by the provided instance. */
-    register: (importData: ParsedImport<H, M, R>) => Promise<any> | any;
+    register: (
+      importData: ParsedImport<H, M, R>,
+    ) => Promise<any> | any;
     /** Called once all routes were registered. */
     ready?: (status: EndpointInfo[]) => Promise<any> | any;
   };

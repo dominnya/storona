@@ -119,7 +119,7 @@ In order to declare a route, you need to export a function with the following si
 ```ts twoslash
 import { define } from "@storona/grammy";
 
-export default define((ctx) => {
+export default define(ctx => {
   ctx.reply("Hello, World!");
 });
 ```
@@ -134,7 +134,7 @@ In case you want to strictly type the context object, you can use the supported 
 import { define } from "@storona/grammy";
 
 // Explicitly define the query type
-export default define<"edited_message">((ctx) => {
+export default define<"edited_message">(ctx => {
   ctx.update.edited_message; // not undefined
 });
 ```
@@ -142,7 +142,7 @@ export default define<"edited_message">((ctx) => {
 ```ts twoslash [Default]
 import { define } from "@storona/grammy";
 
-export default define((ctx) => {
+export default define(ctx => {
   ctx.update.edited_message; // can be undefined
 });
 ```
@@ -150,7 +150,7 @@ export default define((ctx) => {
 ```ts twoslash [L2/L3 Query]
 import { define } from "@storona/grammy";
 
-export default define<"message:entities:mention">((ctx) => {
+export default define<"message:entities:mention">(ctx => {
   ctx.update.message.entities; // not undefined
 });
 ```
@@ -160,7 +160,7 @@ import { define } from "@storona/grammy";
 
 export const method = ["channel_post", ":forward_origin"];
 
-export default define<"channel_post" | ":forward_origin">((ctx) => {
+export default define<"channel_post" | ":forward_origin">(ctx => {
   ctx.update.channel_post; // not undefined
   ctx.update.message?.forward_origin; // not undefined
 });
@@ -180,7 +180,7 @@ import { define } from "@storona/grammy";
 export const route = "/hello";
 export const method = "command";
 
-export default define((ctx) => {
+export default define(ctx => {
   ctx.reply("Hello, World!");
 });
 ```
@@ -197,7 +197,7 @@ import { define } from "@storona/grammy";
 export const description = "Greets the user";
 export const scope = "all_private_chats";
 
-export default define((ctx) => {
+export default define(ctx => {
   ctx.reply("Hello!");
 });
 ```

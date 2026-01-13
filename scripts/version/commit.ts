@@ -1,5 +1,8 @@
 import { $ } from "bun";
-import { Logger, createLogger } from "../../packages/storona/src/logger";
+import {
+  Logger,
+  createLogger,
+} from "../../packages/storona/src/logger";
 import { changeVersions } from "./switch";
 import {
   getArgvVersion,

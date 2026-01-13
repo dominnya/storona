@@ -6,7 +6,9 @@ import type { RouteStructure } from "storona/adapter";
  * @param structure - Route structure.
  * @returns Route structure.
  */
-export function parseCommand(structure: RouteStructure): RouteStructure {
+export function parseCommand(
+  structure: RouteStructure,
+): RouteStructure {
   if (structure.method === "command") {
     const subcommands = structure.endpoint.split("/");
     const endpoint = `/${subcommands[subcommands.length - 1]}`;

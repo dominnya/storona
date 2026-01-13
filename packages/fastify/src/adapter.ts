@@ -10,35 +10,40 @@ import type { FastifyInstance, RouteGenericInterface } from "fastify";
  * Fastify adapter for Storona. Let's you define endpoints in route files.
  *
  * @see {@link https://fastify.dev/ | Fastify Documentation}
- * @see {@link https://storona.domin.lol/ | Storona Documentation}
- * @see {@link https://storona.domin.lol/adapters/fastify | @storona/fastify Documentation}
+ * @see {@link https://storona.domin.zip/ | Storona Documentation}
+ * @see {@link https://storona.domin.zip/adapters/fastify | @storona/fastify Documentation}
  */
-export const adapter = createAdapter<H, M, R, FastifyInstance, Options>(
-  (instance, opts = {}) => {
-    // Fallback to default option set
-    const options = fallbackOptions(opts);
-    const prefix = options.prefix === false ? "" : getPrefix(options.prefix);
+export const adapter = createAdapter<
+  H,
+  M,
+  R,
+  FastifyInstance,
+  Options
+>((instance, opts = {}) => {
+  // Fallback to default option set
+  const options = fallbackOptions(opts);
+  const prefix =
+    options.prefix === false ? "" : getPrefix(options.prefix);
 
-    return {
-      // This is the version of the adapter API. It is used to ensure compatibility.
-      // If the adapter API changes, the version should be bumped along with the necessary changes.
-      version: "1.0.0",
-      on: {
-        route: (structure) => {
-          assertMethod(structure.method);
+  return {
+    // This is the version of the adapter API. It is used to ensure compatibility.
+    // If the adapter API changes, the version should be bumped along with the necessary changes.
+    version: "1.0.0",
+    on: {
+      route: structure => {
+        assertMethod(structure.method);
 
-          structure = prependPrefix(structure, prefix);
+        structure = prependPrefix(structure, prefix);
 
-          return structure;
-        },
-        register: (importData) => {
-          assertExportedVariables(importData);
-          return registerRoute(instance, importData);
-        },
+        return structure;
       },
-    };
-  }
-);
+      register: importData => {
+        assertExportedVariables(importData);
+        return registerRoute(instance, importData);
+      },
+    },
+  };
+});
 
 /**
  * Function to define route in route files. Should be exported as default.
@@ -76,7 +81,7 @@ export const adapter = createAdapter<H, M, R, FastifyInstance, Options>(
  * ```
  */
 export function define<RouteGeneric extends RouteGenericInterface>(
-  handler: H<RouteGeneric>
+  handler: H<RouteGeneric>,
 ): H<RouteGeneric> {
   return handler;
 }

@@ -16,7 +16,7 @@ hero:
       link: /guide/introduction
     - theme: alt
       text: GitHub
-      link: https://github.com/domin-mnd/storona
+      link: https://github.com/dominnya/storona
 
 features:
   - icon:

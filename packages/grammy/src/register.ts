@@ -9,7 +9,10 @@ import { CALLBACKS } from "./assert";
  * @param bot - The bot instance.
  * @param importData - The parsed import data.
  */
-export function registerCommand(bot: Bot, importData: ParsedImport<H, M, R>) {
+export function registerCommand(
+  bot: Bot,
+  importData: ParsedImport<H, M, R>,
+) {
   if (
     !Array.isArray(importData.method) &&
     CALLBACKS.includes(importData.method as Callbacks)

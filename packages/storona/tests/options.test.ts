@@ -1,5 +1,9 @@
 import { expect, test } from "vitest";
-import { defineOptions, fallbackOptions, undefinedAdapter } from "@/utils";
+import {
+  defineOptions,
+  fallbackOptions,
+  undefinedAdapter,
+} from "@/utils";
 
 test("defineOptions() normalizes input", () => {
   expect(defineOptions("random/routes")).toStrictEqual({

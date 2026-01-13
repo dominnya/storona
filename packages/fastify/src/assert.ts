@@ -18,7 +18,7 @@ export function assertMethod(method: string): asserts method is M {
 }
 
 export function assertExportedVariables(
-  route: unknown
+  route: unknown,
 ): asserts route is CorrectImport<H, M, R> {
   if (typeof route !== "object" || route === null) {
     throw new Error("No exports found");
@@ -27,8 +27,13 @@ export function assertExportedVariables(
   if ("method" in route) {
     const typeOfMethod = typeof route.method;
 
-    if (typeOfMethod !== "string" || !METHODS.includes(route.method as M)) {
-      throw new Error(`Exported method must be one of: ${METHODS.join(", ")}`);
+    if (
+      typeOfMethod !== "string" ||
+      !METHODS.includes(route.method as M)
+    ) {
+      throw new Error(
+        `Exported method must be one of: ${METHODS.join(", ")}`,
+      );
     }
   }
 

@@ -15,7 +15,8 @@ export async function verifyUnchangedGitFiles(
 ) {
   // Check changes for unstaged and staged files
   const unstaged = await $`git diff --quiet ${files}`.nothrow();
-  const staged = await $`git diff --cached --quiet ${files}`.nothrow();
+  const staged =
+    await $`git diff --cached --quiet ${files}`.nothrow();
 
   const changes = !!staged.exitCode || !!unstaged.exitCode;
 

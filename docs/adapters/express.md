@@ -77,7 +77,7 @@ Note that the routes can use any file extension, but the file structure must be 
 
 For an example of `@storona/express` usage in a real-world application, see following repositories:
 
-- [Gym Service API](https://github.com/domin-mnd/gym-backend)
+- [Gym Service API](https://github.com/dominnya/gym-backend)
 
 > [!NOTE]
 > You can add your project to this list by submitting a pull request to the official repository!

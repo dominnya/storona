@@ -26,11 +26,11 @@ export const adapter = createAdapter((instance, opts = {}) => {
       // Called once adapter is initialized by storona itself
       init: () => {},
       // Parse route path structure (route + method)
-      route: (structure) => structure,
+      route: structure => structure,
       // Registering a route by the provided instance
-      register: (importData) => {},
+      register: importData => {},
       // Called once all routes were registered
-      ready: (status) => {},
+      ready: status => {},
     },
   };
 });
@@ -112,9 +112,11 @@ type O = {
   prefix?: string;
 };
 
-export const adapter = createAdapter<H, M, R, I, O>((instance, opts = {}) => {
-  // ...
-});
+export const adapter = createAdapter<H, M, R, I, O>(
+  (instance, opts = {}) => {
+    // ...
+  },
+);
 ```
 
 As you can see, you can define types for handler, method, route, instance, and options. These types will be used in various parts of the adapter.
@@ -195,4 +197,4 @@ export default define(() => {});
 
 ## Example
 
-For more detailed information, see the implementation of Express adapter in the [official repository](https://github.com/domin-mnd/storona/blob/master/packages/express/src/adapter.ts).
+For more detailed information, see the implementation of Express adapter in the [official repository](https://github.com/dominnya/storona/blob/master/packages/express/src/adapter.ts).

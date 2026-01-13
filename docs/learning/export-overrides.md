@@ -56,7 +56,7 @@ import { define } from "@storona/grammy";
 
 export const method = ["message", "edited_message"];
 
-export default define((ctx) => {
+export default define(ctx => {
   if (/foo|bar/.test(ctx.msg?.text ?? "")) {
     ctx.reply("Caught foobar!");
   }

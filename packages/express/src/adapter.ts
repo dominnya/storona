@@ -10,34 +10,35 @@ import { registerRoute } from "@/register";
  * Express.js adapter for Storona. Let's you define endpoints in route files.
  *
  * @see {@link https://expressjs.com/ | Express Documentation}
- * @see {@link https://storona.domin.lol/ | Storona Documentation}
- * @see {@link https://storona.domin.lol/adapters/express | @storona/express Documentation}
+ * @see {@link https://storona.domin.zip/ | Storona Documentation}
+ * @see {@link https://storona.domin.zip/adapters/express | @storona/express Documentation}
  */
 export const adapter = createAdapter<H, M, R, Express, Options>(
   (instance, opts = {}) => {
     // Fallback to default option set
     const options = fallbackOptions(opts);
-    const prefix = options.prefix === false ? "" : getPrefix(options.prefix);
+    const prefix =
+      options.prefix === false ? "" : getPrefix(options.prefix);
 
     return {
       // This is the version of the adapter API. It is used to ensure compatibility.
       // If the adapter API changes, the version should be bumped along with the necessary changes.
       version: "1.0.0",
       on: {
-        route: (structure) => {
+        route: structure => {
           assertMethod(structure.method);
 
           structure = prependPrefix(structure, prefix);
 
           return structure;
         },
-        register: (importData) => {
+        register: importData => {
           assertExportedVariables(importData);
           return registerRoute(instance, importData);
         },
       },
     };
-  }
+  },
 );
 
 /**
@@ -82,7 +83,7 @@ export function define<Route extends RouteGeneric = RouteGeneric>(
     Route["ReqBody"],
     Route["ReqQuery"],
     Route["Locals"] & Record<string, any>
-  >
+  >,
 ): H<
   Route["Params"],
   Route["ResBody"],

@@ -1,5 +1,8 @@
 import { $ } from "bun";
-import { Logger, createLogger } from "../../packages/storona/src/logger";
+import {
+  Logger,
+  createLogger,
+} from "../../packages/storona/src/logger";
 import { SemVer, getArgvVersion, getPackageJsons } from "./utils";
 
 if (import.meta.main) {
@@ -41,7 +44,7 @@ export async function changeVersions(
   }
 
   // Format these package.json files
-  await $`bunx prettier --write ${files.join(" ")}`.quiet();
+  await $`bun x prettier --write ${files.join(" ")}`.quiet();
 
   return files;
 }

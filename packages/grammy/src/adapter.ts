@@ -16,8 +16,8 @@ import { registerCommand } from "@/register";
  * Grammy adapter for Storona. Let's you define events in route files.
  *
  * @see {@link https://grammy.dev/ | Grammy Documentation}
- * @see {@link https://storona.domin.lol/ | Storona Documentation}
- * @see {@link https://storona.domin.lol/adapters/grammy | @storona/grammy Documentation}
+ * @see {@link https://storona.domin.zip/ | Storona Documentation}
+ * @see {@link https://storona.domin.zip/adapters/grammy | @storona/grammy Documentation}
  */
 export const adapter = createAdapter<H, M, R, Bot, Options>(
   (bot, opts = {}) => {
@@ -50,7 +50,7 @@ export const adapter = createAdapter<H, M, R, Bot, Options>(
         },
       },
     };
-  }
+  },
 );
 
 /**

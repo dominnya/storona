@@ -5,7 +5,8 @@ import type { EndpointInfo } from "storona/adapter";
 export const CHAT_SCOPE_REGEX = /^chat:(@[^:]+|\d+)$/g;
 export const CHAT_ADMINISTRATORS_SCOPE_REGEX =
   /^chat_administrators:(@[^:]+|\d+)$/g;
-export const CHAT_MEMBER_SCOPE_REGEX = /^chat_member:(@[^:]+|\d+):(\d+)$/g;
+export const CHAT_MEMBER_SCOPE_REGEX =
+  /^chat_member:(@[^:]+|\d+):(\d+)$/g;
 
 /**
  * Convert Storona's inline string scope to a BotCommandScope interface from grammy.
@@ -37,7 +38,9 @@ function parseScope(scope: string): BotCommandScope {
   }
 
   if (CHAT_MEMBER_SCOPE_REGEX.test(scope)) {
-    const [id, user_id] = scope.replace("chat_member:", "").split(":");
+    const [id, user_id] = scope
+      .replace("chat_member:", "")
+      .split(":");
     const chat_id = id.startsWith("@") ? id : Number(id);
     return { type: "chat_member", chat_id, user_id: Number(user_id) };
   }
@@ -50,7 +53,9 @@ function parseScope(scope: string): BotCommandScope {
  * @param data - Data object.
  * @returns Scope code.
  */
-function getScope(data: Record<string, unknown>): BotCommandScope | undefined {
+function getScope(
+  data: Record<string, unknown>,
+): BotCommandScope | undefined {
   const scope = data.scope as string | undefined;
   return scope ? parseScope(scope) : undefined;
 }
@@ -78,7 +83,7 @@ function groupCommands(status: EndpointInfo[]): Group[] {
       description: route.data.description as string,
     };
 
-    const group = commands.find((group) => group.scope === scope);
+    const group = commands.find(group => group.scope === scope);
 
     if (group) {
       group.commands.push(command);
@@ -93,7 +98,10 @@ function groupCommands(status: EndpointInfo[]): Group[] {
   return commands;
 }
 
-export async function setMyCommands(bot: Bot, status: EndpointInfo[]) {
+export async function setMyCommands(
+  bot: Bot,
+  status: EndpointInfo[],
+) {
   for (const group of groupCommands(status)) {
     await bot.api.setMyCommands(group.commands, {
       scope: group.scope,

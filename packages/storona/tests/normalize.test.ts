@@ -7,8 +7,12 @@ test("normalizeManualRoute() correctly handles string", () => {
 });
 
 test("normalizeManualRoute() correctly handles regex", () => {
-  expect(normalizeManualRoute(/someregex/)).toStrictEqual(/someregex/);
-  expect(normalizeManualRoute(/someregexx/)).toStrictEqual(/someregexx/);
+  expect(normalizeManualRoute(/someregex/)).toStrictEqual(
+    /someregex/,
+  );
+  expect(normalizeManualRoute(/someregexx/)).toStrictEqual(
+    /someregexx/,
+  );
 });
 
 test("normalizeManualRoute() correctly handles other types", () => {

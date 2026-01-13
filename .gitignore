@@ -1,16 +1,12 @@
 # Node
 node_modules
 
-# Korob
-dist
-.korob
-.prettierrc.json
-.prettierignore
-biome.json
-
 # Vitepress
 docs/.vitepress/cache
 docs/.vitepress/.temp
 
 # Turbo
 .turbo
+
+# Build
+dist
