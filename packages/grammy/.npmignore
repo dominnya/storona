@@ -13,4 +13,7 @@ turbo.json
 CONTRIBUTING.md
 
 # Lock file
-bun.lockb
+bun.lock
+
+# Turbo
+.turbo

@@ -11,4 +11,7 @@ vitest.config.ts
 CONTRIBUTING.md
 
 # Dependencies
-bun.lockb
+bun.lock
+
+# Turbo
+.turbo
