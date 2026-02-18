@@ -1,6 +1,6 @@
 {
   "name": "@storona/discord.js",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "File-based router adapter for discord.js",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
