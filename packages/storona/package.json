@@ -46,7 +46,8 @@
     "node": ">=18"
   },
   "dependencies": {
-    "tsup": "8.4.0"
+    "@babel/preset-react": "^7.25.9",
+    "jiti": "^2.4.2"
   },
   "devDependencies": {
     "@domin-mnd/config": "0.0.3",

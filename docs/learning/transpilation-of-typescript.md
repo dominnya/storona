@@ -2,7 +2,7 @@
 
 ## Overview
 
-Under the hood Storona uses [tsup](https://tsup.egoist.dev/) to transpile TypeScript/JSX files. This allows developers to write code in TypeScript and use the latest ECMAScript features without worrying about bundler configuration or how to transpile the code.
+Under the hood Storona uses [jiti](https://github.com/unjs/jiti) to transpile TypeScript/JSX files on-the-fly. This allows developers to write code in TypeScript and use the latest ECMAScript features without worrying about bundler configuration or how to transpile the code.
 
 > [!IMPORTANT]
 > Storona will not transpile the code if given runtime is [Bun](https://bun.sh/docs/runtime/typescript). This guide is only applicable for the [Node.js](https://nodejs.org/en) runtime.
@@ -13,7 +13,7 @@ Storona does not provide any configuration for the transpilation process. Howeve
 
 ### CJS/ESM Output
 
-To configure the output format of the transpiled code, you can use the `type` field in the `package.json` file. The `type` field can be set to `module` or `commonjs` to specify the output.
+Jiti automatically detects the module format based on the `type` field in your `package.json` file. The `type` field can be set to `module` or `commonjs` to specify the output.
 
 Storona, similar to Node.js, defaults to `commonjs` if the `type` field is not set.
 

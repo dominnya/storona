@@ -1,11 +1,8 @@
-import { readFileSync, readdirSync } from "fs";
-import { isAbsolute, join, normalize, relative, resolve } from "path";
-import { build } from "tsup";
+import { readdirSync } from "fs";
+import { isAbsolute, join, normalize, relative } from "path";
 import { createAdapter, type RouteStructure } from "@/adapter";
 import type { RouterOptions } from "@/types";
 import { assertMethod } from "@/validate";
-
-export const BUILD_DIR = resolve("node_modules/.cache/storona");
 
 /**
  * Check if code is running in bun environment.
@@ -37,40 +34,6 @@ export function* getFiles(dir: string): Generator<string> {
       yield yieldValue;
     }
   }
-}
-
-let packageJson: Record<string, unknown> | null | undefined;
-
-/**
- * Get package.json.
- * @returns Package.json content. Null if not found.
- */
-export function getPackageJson(): Record<string, unknown> | null {
-  try {
-    return JSON.parse(
-      readFileSync(join(process.cwd(), "package.json"), "utf-8"),
-    );
-  } catch {
-    return null;
-  }
-}
-
-/**
- * Get project format from package.json.
- * @returns Project format. "cjs" or "esm".
- */
-export function getProjectFormat(): "cjs" | "esm" {
-  if (packageJson === undefined) {
-    packageJson = getPackageJson();
-  }
-
-  if (!packageJson) return "cjs";
-
-  return "type" in packageJson &&
-    typeof packageJson.type === "string" &&
-    packageJson.type === "module"
-    ? "esm"
-    : "cjs";
 }
 
 /**
@@ -121,41 +84,6 @@ export function getStructure(
     endpoint: `/${normalizedEndpoint}`,
     method,
   };
-}
-
-/**
- * Transpile routes to cjs in node_modules/.cache/storona.
- * @param options - Required router options.
- */
-export async function buildRouter(options: Required<RouterOptions>) {
-  // Don't transpile when running in bun
-  if (isBun()) return;
-  const format = getProjectFormat();
-  const isEsm = format === "esm";
-  const esmPrefix = isEsm ? "m" : "";
-
-  const entryDir = join(process.cwd(), options.directory).replace(
-    /\\/g,
-    "/",
-  );
-
-  await build({
-    entry: [entryDir],
-    outDir: join(BUILD_DIR, options.directory),
-    splitting: true,
-    esbuildOptions: esOptions => {
-      esOptions.outbase = entryDir;
-    },
-    format,
-    silent: true,
-    bundle: true,
-    outExtension: () => ({
-      js: `.${esmPrefix}js`,
-      dts: ".d.ts",
-    }),
-    dts: false,
-    clean: true,
-  });
 }
 
 export const undefinedAdapter = createAdapter((i, _o) => ({

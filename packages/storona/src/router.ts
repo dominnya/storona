@@ -9,7 +9,6 @@ import { type Logger, createLogger } from "@/logger";
 import { normalizeManualRoute } from "@/normalize";
 import type { EndpointInfo, RouterOptions } from "@/types";
 import {
-  buildRouter,
   defineOptions,
   fallbackOptions,
   getFiles,
@@ -130,9 +129,6 @@ export async function createRouter<T>(
     }
     return endpointStatus;
   }
-
-  // Build the whole router directory
-  await buildRouter(options);
 
   for (const file of getFiles(options.directory)) {
     let importData: unknown;

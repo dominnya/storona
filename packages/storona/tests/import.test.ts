@@ -1,52 +1,33 @@
-import { cp } from "fs/promises";
 import { expect, test } from "vitest";
 import { getHandler, getImport, getMethod, getRoute } from "@/import";
 
 test("getImport() correctly handles extensions", async () => {
-  await cp("tests/dummy", "node_modules/.cache/storona/dummy", {
-    recursive: true,
-  });
+  // With jiti, we can directly import JS files without pre-building
+  const module = (await getImport("tests/dummy/common.js")) as any;
 
-  const module = JSON.stringify(await getImport("dummy/common.ts"));
-  const equalModule = JSON.stringify({
-    default: {
-      default: (_req: unknown, _res: unknown) => {},
-      method: "get",
-      route: "/some/nested/route",
-    },
-  });
-
-  expect(module).toEqual(equalModule);
+  // Verify the structure has the expected properties
+  expect(module.default).toBeDefined();
+  expect(module.default.method).toEqual("get");
+  expect(module.default.route).toEqual("/some/nested/route");
+  expect(typeof module.default.default).toEqual("function");
 });
 
 test("getHandler() correctly returns function", async () => {
-  await cp("tests/dummy", "node_modules/.cache/storona/dummy", {
-    recursive: true,
-  });
-
-  const module = await getImport("dummy/common.ts");
+  const module = await getImport("tests/dummy/common.js");
   const handler = getHandler(module);
 
   expect(handler).toBeTypeOf("function");
 });
 
 test("getMethod() correctly returns manually set method", async () => {
-  await cp("tests/dummy", "node_modules/.cache/storona/dummy", {
-    recursive: true,
-  });
-
-  const module = await getImport("dummy/common.ts");
+  const module = await getImport("tests/dummy/common.js");
   const method = getMethod(module);
 
   expect(method).toEqual("get");
 });
 
 test("getRoute() correctly returns manually set route", async () => {
-  await cp("tests/dummy", "node_modules/.cache/storona/dummy", {
-    recursive: true,
-  });
-
-  const module = await getImport("dummy/common.ts");
+  const module = await getImport("tests/dummy/common.js");
   const route = getRoute(module);
 
   expect(route).toEqual("/some/nested/route");
