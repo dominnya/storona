@@ -1,6 +1,6 @@
 {
   "name": "storona",
-  "version": "1.1.3",
+  "version": "2.0.0",
   "description": "Simple opinionated file-based routing for your JavaScript applications",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
