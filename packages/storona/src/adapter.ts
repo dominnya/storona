@@ -1,5 +1,72 @@
-import type { EndpointInfo } from "@/types";
-export type { EndpointInfo };
+export type EndpointInfo =
+  | {
+      path: string;
+      endpoint: string | RegExp;
+      method: string;
+      registered: true;
+      data: Record<string, unknown>;
+    }
+  | {
+      path: string;
+      registered: false;
+      error: Error;
+    };
+
+type IsUppercase<C extends string> =
+  C extends Uppercase<C>
+    ? C extends Lowercase<C>
+      ? false
+      : true
+    : false;
+
+type ReplaceAll<
+  S extends string,
+  From extends string,
+  To extends string,
+> = S extends `${infer Head}${From}${infer Tail}`
+  ? `${Head}${To}${ReplaceAll<Tail, From, To>}`
+  : S;
+
+type CamelToSnake<
+  S extends string,
+  PrevLower extends boolean = false,
+> = S extends `${infer C}${infer Rest}`
+  ? C extends "_"
+    ? `_${CamelToSnake<Rest, false>}`
+    : IsUppercase<C> extends true
+      ? `${PrevLower extends true ? "_" : ""}${Lowercase<C>}${CamelToSnake<Rest, false>}`
+      : `${Lowercase<C>}${CamelToSnake<Rest, true>}`
+  : S;
+
+type PascalToSnake<S extends string> =
+  S extends `${infer C}${infer Rest}`
+    ? `${Lowercase<C>}${CamelToSnake<Rest, false>}`
+    : S;
+
+type UpperToSnake<S extends string> = Lowercase<
+  ReplaceAll<S, "__", "_">
+>;
+
+type KebabToSnake<S extends string> = Lowercase<
+  ReplaceAll<S, "-", "_">
+>;
+
+type SentenceToSnake<S extends string> = Lowercase<
+  ReplaceAll<S, " ", "_">
+>;
+
+type SnakeToSnake<S extends string> = Lowercase<
+  ReplaceAll<S, "__", "_">
+>;
+
+export namespace SnakeCaseFrom {
+  export type Camel<S extends string> = CamelToSnake<S>;
+  export type Pascal<S extends string> = PascalToSnake<S>;
+  export type Upper<S extends string> = UpperToSnake<S>;
+  export type Kebab<S extends string> = KebabToSnake<S>;
+  export type Sentence<S extends string> = SentenceToSnake<S>;
+  export type Snake<S extends string> = SnakeToSnake<S>;
+}
 
 interface ImportOrigin<H, M, R> {
   default: H;
@@ -12,8 +79,10 @@ export interface RouteStructure {
   method: string;
 }
 
-export interface CorrectImport<H, M, R>
-  extends Omit<ImportOrigin<H, M, R>, "default"> {
+export interface CorrectImport<H, M, R> extends Omit<
+  ImportOrigin<H, M, R>,
+  "default"
+> {
   default: ImportOrigin<H, M, R> | H;
 }
 

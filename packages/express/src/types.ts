@@ -1,6 +1,7 @@
 import type { RequestHandler } from "express";
+import type { SnakeCaseFrom } from "storona/adapter";
 
-export type M =
+type Method =
   | "all"
   | "get"
   | "post"
@@ -9,6 +10,8 @@ export type M =
   | "patch"
   | "options"
   | "head";
+
+export type M = SnakeCaseFrom.Snake<Method>;
 
 export interface ParsedQs {
   [key: string]:

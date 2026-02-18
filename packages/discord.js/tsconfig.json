@@ -2,13 +2,13 @@
   "extends": ["@domin-mnd/config/ts"],
   "compilerOptions": {
     "tsBuildInfoFile": "node_modules/.cache/.tsbuildinfo",
+    "moduleResolution": "bundler",
     "outDir": "./dist",
-    "target": "ES2015",
     "experimentalDecorators": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src", "packages/storona/tests"]
+  "include": ["src", "tests"]
 }

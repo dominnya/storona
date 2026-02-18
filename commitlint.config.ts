@@ -9,7 +9,7 @@ const config: UserConfig = {
     "scope-enum": [
       RuleConfigSeverity.Error,
       "always",
-      ["express", "fastify", "grammy"],
+      ["express", "fastify", "grammy", "discord.js"],
     ],
     "type-enum": [
       RuleConfigSeverity.Error,

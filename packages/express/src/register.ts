@@ -6,7 +6,7 @@ export function registerRoute(
   instance: Express,
   importData: ParsedImport<H, M, R>,
 ): void {
-  instance[importData.method](
+  instance[importData.method as keyof Express](
     importData.route,
     // Suppress type mismatch error
     importData.handler as any,

@@ -1,4 +1,3 @@
-import { version } from "package.json";
 import { expect, test } from "vitest";
 import { fallbackOptions, getStructure } from "@/utils";
 

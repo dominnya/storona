@@ -54,7 +54,7 @@ test("Throws an error when override is of different type", () => {
     "Failed to register [object Object]: Exported route must be either string or regex",
   );
   expect(debug.logs[5]).toBe(
-    "Failed to register /nested/nested/!wrong-method: Event must of type string\nReceived: 123",
+    "Failed to register /nested/nested/!wrong-method: Event must be of type string\nReceived: 123",
   );
 });
 

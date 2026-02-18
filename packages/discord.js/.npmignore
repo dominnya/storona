@@ -1,0 +1,16 @@
+# Dist only
+src
+public
+tests
+.turbo
+
+# Configs
+tsconfig.json
+tsup.config.ts
+turbo.json
+
+# Markdown
+CONTRIBUTING.md
+
+# Lock file
+bun.lockb

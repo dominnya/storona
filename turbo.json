@@ -17,6 +17,9 @@
     "@storona/grammy#build": {
       "dependsOn": ["storona#build"]
     },
+    "@storona/discord.js#build": {
+      "dependsOn": ["storona#build"]
+    },
     "@storona/docs#build": {
       "dependsOn": [
         "@storona/express#build",
@@ -29,6 +32,9 @@
       "outputs": []
     },
     "lint": {
+      "outputs": []
+    },
+    "typecheck": {
       "outputs": []
     },
     "publish:test": {

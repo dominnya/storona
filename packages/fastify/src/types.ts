@@ -5,8 +5,9 @@ import type {
   RouteGenericInterface,
   RouteHandlerMethod,
 } from "fastify";
+import type { SnakeCaseFrom } from "storona/adapter";
 
-export type M =
+type Method =
   | "get"
   | "post"
   | "put"
@@ -14,6 +15,8 @@ export type M =
   | "patch"
   | "options"
   | "head";
+
+export type M = SnakeCaseFrom.Snake<Method>;
 
 export type H<
   RouteGeneric extends RouteGenericInterface = RouteGenericInterface,

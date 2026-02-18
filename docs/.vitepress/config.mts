@@ -68,6 +68,7 @@ export default defineConfig({
           },
           { text: "Express", link: "/adapters/express" },
           { text: "Fastify", link: "/adapters/fastify" },
+          { text: "discord.js", link: "/adapters/discord.js" },
           { text: "grammY", link: "/adapters/grammy" },
         ],
       },

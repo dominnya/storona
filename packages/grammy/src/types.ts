@@ -5,6 +5,7 @@ import type {
   FilterQuery,
   HearsContext,
 } from "grammy";
+import type { SnakeCaseFrom } from "storona/adapter";
 
 export type MethodType = FilterQuery | Callbacks | void;
 
@@ -12,12 +13,13 @@ export type H<Q extends MethodType = void> = (
   ctx: Ctx<Q>,
 ) => any | Promise<any>;
 
-type CallbacksContext<T extends Callbacks> = T extends "command"
+type CallbacksContext<T extends MethodType> = T extends "command"
   ? CommandContext<Context>
   : HearsContext<Context>;
 
-type EventsContext<T extends FilterQuery | void> =
-  T extends FilterQuery ? Filter<Context, T> : Context;
+type EventsContext<T extends MethodType> = T extends FilterQuery
+  ? Filter<Context, T>
+  : Context;
 
 type Middleware<T extends MethodType, U, V> = T extends Callbacks
   ? U
@@ -25,14 +27,12 @@ type Middleware<T extends MethodType, U, V> = T extends Callbacks
 
 type Ctx<T extends MethodType> = Middleware<
   T,
-  // @ts-expect-error - Suppress type omitting error
   CallbacksContext<T>,
-  // @ts-expect-error - Suppress type omitting error
   EventsContext<T>
 >;
 
-export type Callbacks = "command" | "hears";
-export type Events =
+export type Callbacks = SnakeCaseFrom.Snake<"command" | "hears">;
+export type Events = SnakeCaseFrom.Snake<
   | "message"
   | "edited_message"
   | "channel_post"
@@ -55,7 +55,8 @@ export type Events =
   | "chat_join_request"
   | "chat_boost"
   | "removed_chat_boost"
-  | "purchased_paid_media";
+  | "purchased_paid_media"
+>;
 
 export type M = Callbacks | Events | Events[];
 

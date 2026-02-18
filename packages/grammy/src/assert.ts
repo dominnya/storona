@@ -112,7 +112,7 @@ export function assertExportedVariables(
   ) {
     // Ignore METHODS check because of L2, L3 levels
     throw new Error(
-      `Event must of type string\nReceived: ${route.method}`,
+      `Event must be of type string\nReceived: ${route.method}`,
     );
   }
 
